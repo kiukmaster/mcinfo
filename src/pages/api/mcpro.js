@@ -1,5 +1,3 @@
-import fetch from "node-fetch";
-
 export default async (req, res) => {
   const { nick } = req.query;
 
