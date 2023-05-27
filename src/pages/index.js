@@ -1,20 +1,14 @@
-import { useRef, useState } from "react";
+import { useRef} from "react";
 
 export default function Home() {
-    const [searchDetail, setSearchDetail] = useState("");
     const searchRef = useRef();
 
-    const onSearch = (e) => {
-        e.preventDefault();
-        setSearchDetail(searchRef.current.value);
-        console.log(searchRef.current.value);
+    const onSearch = async (e) => {
+        e.preventDefault(); 
+        const searchValue = searchRef.current.value;
         searchRef.current.value = "";
-        fetch(`https://api.mojang.com/users/profiles/minecraft/${searchDetail}`)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                window.location.href = `/players/${data.name}`;
-            })};
+        window.location.href = `/players/${searchValue}`;
+    }
 
     return (
         <div>
@@ -24,7 +18,49 @@ export default function Home() {
                     <button onClick={onSearch} type="submit">Search</button>  
                 </div>
             </div>
+            <div className="another">
+                <h1 className="center">제작자의 다른 사이트 모음</h1>
+                <div className="mysite">
+                    <a href="https://kiuk.pages.dev/" target="_blank">
+                        <div className="card">
+                            <img src="./kiuk.jpg" alt="..." />
+                        </div>
+                    </a>
+                    <a href="https://arsf-dic.pages.dev/" target="_blank">
+                    <div className="card">
+                        <img src="./cre.png" alt="..." />
+                    </div>
+                    </a>
+                    <span>포트폴리오 사이트</span>
+                    <span>ARSF 도감</span>
+                </div>
+            </div>
             <style jsx>{`
+                .card {
+                    background: white;
+                    box-shadow: 0px -3px 0 15px #ffffff, 0 20px 0 15px #ffffff;
+                }
+                span {
+                    margin: 5px;
+                    color: black;
+                    font-weight: bold;
+                }
+                img {
+                    width: 200px;
+                    height: 200px;
+                }
+                .mysite{
+                    margin-top: 5rem;
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    place-items: center;
+                }
+                .center {
+                    text-align: center;
+                }
+                .another {
+                    margin: 10%;
+                }
                 .container {
                     margin-top: 100px;
                     display: grid;
@@ -39,9 +75,12 @@ export default function Home() {
                     padding-right: 30px;
                     width: 400px;
                     height: 35px;
+                    background: white;
                     border-radius: 20px;
                     border-color: red;
                     font-size: 20px;
+                    font-weight: bold;
+                    color: #21B400;
                 }
                 button {
                     cursor: pointer;
