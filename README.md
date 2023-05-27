@@ -1,1 +1,1 @@
-# MC Helper
+# Check Minecraft player profile
