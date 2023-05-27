@@ -5,7 +5,8 @@ export default function Home() {
 
     const onSearch = async (e) => {
         e.preventDefault(); 
-        const searchValue = searchRef.current.value;
+        const searchCheck = searchRef.current.value;
+        const searchValue = searchCheck.trim();
         searchRef.current.value = "";
         window.location.href = `/players/${searchValue}`;
     }
