@@ -3,8 +3,7 @@ import { useRef } from "react";
 export default function Home() {
     const searchRef = useRef();
 
-    const onSearch = async (e) => {
-        e.preventDefault(); 
+    const onSearch = () => {
         const searchCheck = searchRef.current.value;
         const searchValue = searchCheck.trim();
         searchRef.current.value = "";
@@ -15,47 +14,17 @@ export default function Home() {
         <div>
             <div className="container">
                 <div className="input-wrapper">
-                    <input ref={searchRef} type="text" placeholder="enter your nickname" />
-                    <button onClick={onSearch} type="submit">Search</button>  
-                </div>
-            </div>
-            <div className="another">
-                <h1 className="center">제작자의 다른 사이트 모음</h1>
-                <div className="mysite">
-                    <a href="https://kiuk.pages.dev/" target="_blank">
-                        <div className="card">
-                            <img src="./kiuk.jpg" alt="..." />
-                        </div>
-                    </a>
-                    <a href="https://arsf-dic.pages.dev/" target="_blank">
-                    <div className="card">
-                        <img src="./cre.png" alt="..." />
-                    </div>
-                    </a>
-                    <span>포트폴리오 사이트</span>
-                    <span>ARSF 도감</span>
+                    <input ref={searchRef} type="text" placeholder="enter your nickname"
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                                onSearch();
+                            }
+                        }} 
+                    />
+                    <button onClick={onSearch} type="submit">Search</button>
                 </div>
             </div>
             <style jsx>{`
-                .card {
-                    background: white;
-                    box-shadow: 0px -3px 0 15px #ffffff, 0 20px 0 15px #ffffff;
-                }
-                span {
-                    margin: 5px;
-                    color: black;
-                    font-weight: bold;
-                }
-                img {
-                    width: 200px;
-                    height: 200px;
-                }
-                .mysite{
-                    margin-top: 5rem;
-                    display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    place-items: center;
-                }
                 .center {
                     text-align: center;
                 }
@@ -94,15 +63,14 @@ export default function Home() {
                     border: none;
                     border-left: solid 1px;
                 }
-                @media(max-width: 410px) {
+                @media(max-width: 500px) {
                 input {
                     padding: 10px;
-                    width: 300px;
-                    height: 28px;
+                    width: 250px;
+                    height: 24px;
                     border-radius: 15px;
                     border-color: red;
                     font-size: 15px;
-                }
                 }
             `}
             </style>
